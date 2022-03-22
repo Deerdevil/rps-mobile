@@ -17,28 +17,45 @@ function playerInput() {
   return output;
 }
 
+//Plays one round
 const computerSelection = computerPlay();
 const playerSelection = playerInput();
-//Plays one round
-
+let playerScore = 0;
+let computerScore = 0;
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "Rock" && computerSelection === "Scissor") {
-    console.log("Rock beats scissor");
+    playerScore++;
+    let result = "Player wins. Rock beats scissor";
+    return result;
   } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-    console.log("Scissor beats paper");
+    playerScore++;
+    let result = "Player wins. Scissor beats paper";
+    return result;
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    console.log("Paper beats rock");
+    playerScore++;
+    let result = "Player wins. Paper beats rock";
+    return result;
   } else if (playerSelection === computerSelection) {
-    console.log("It`s a draw");
+    let result = "No one wins this round";
+    return result;
   } else {
-    console.log("Computer wins this round");
+    computerScore++;
+    let result = "Computer wins this round";
+    return result;
+  }
+}
+// playRound(playerSelection, computerSelection);
+
+// // Plays the game 5 times
+function game() {
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound(playerSelection, computerSelection));
+    if (playerScore > computerScore) {
+      console.log(`Player has ${playerScore} wins`);
+    } else if (playerScore < computerScore) {
+      console.log(`Computer has ${computerScore} wins`);
+    }
   }
 }
 
-// Plays the game 5 times
-function game() {
-  for (let i = 0; i < 5; i++) {
-    playRound(playerSelection, computerSelection);
-  }
-}
 game();
