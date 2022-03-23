@@ -33,21 +33,31 @@ function playRound(playerSelection, computerSelection) {
     return outcome;
   }
 }
-// const computerSelection = computerPlay();
-// let playerSelection = "Rock";
+function playerInput() {
+  let input = prompt("Rock paper or scissor?").toLowerCase();
+  return input.charAt(0).toUpperCase().concat(input.slice(1));
+}
+
 document.querySelector(".btn").addEventListener("click", game);
 function game() {
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Input answer");
-    let computerSelection = computerPlay();
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(
-      `Player picks: ${playerSelection} and has ${playerScore} points`
-    );
-    console.log(
-      `Computer picks: ${computerSelection} and has ${computerScore} points`
-    );
+  let total = 0;
+
+  if (total < 5) {
+    for (let i = 0; i < 5; i++) {
+      total++;
+      let playerSelection = playerInput();
+      let computerSelection = computerPlay();
+      console.log(playRound(playerSelection, computerSelection));
+      console.log(
+        `Player picks: ${playerSelection} and has ${playerScore} points`
+      );
+      console.log(
+        `Computer picks: ${computerSelection} and has ${computerScore} points`
+      );
+      console.log(total);
+    }
   }
+
   if (playerScore > computerScore) {
     console.log(`Player wins with ${playerScore} to ${computerScore}`);
   } else if (playerScore === computerScore) {
