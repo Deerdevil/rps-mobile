@@ -1,8 +1,8 @@
 "use strict:";
-
-let computerScore = 0;
-let playerScore = 0;
-
+const computerQ = document.querySelector(".computer--q");
+const computerRock = document.querySelector(".rock");
+const computerPaper = document.querySelector(".paper");
+const computerScissor = document.querySelector(".scissor");
 const selectRock = document.querySelector(".player--rock");
 const selectPaper = document.querySelector(".player--paper");
 const selectScissor = document.querySelector(".player--scissor");
@@ -15,59 +15,109 @@ function computerPlay() {
   let computerChoice = [Math.floor(Math.random() * computerChoiceList.length)];
   return computerChoiceList[computerChoice];
 }
+let computerScore = 0;
+let playerScore = 0;
+let totalScore = 0;
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    let outcome = `Both picked ${playerSelection}`;
-
+    let outcome = (document.querySelector(
+      ".info h1"
+    ).textContent = `Both picked ${playerSelection}`);
+    totalScore++;
     return outcome;
   } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
-    let outcome = "Rock beats scissor";
+    let outcome = (document.querySelector(
+      ".info h1"
+    ).textContent = `Rock beats scissor`);
     playerScore++;
-    // playerScore = +1;
+    totalScore++;
     return outcome;
   } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-    let outcome = "Scissor beats paper";
-    playerScore = +1;
+    let outcome = (document.querySelector(
+      ".info h1"
+    ).textContent = `Scissor beats paper`);
+    playerScore++;
+    totalScore++;
     return outcome;
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    let outcome = "Paper beats rock";
-    playerScore = +1;
+    let outcome = (document.querySelector(
+      ".info h1"
+    ).textContent = `Paper beats rock`);
+    playerScore++;
+    totalScore++;
     return outcome;
   } else {
-    let outcome = "Computer wins";
-    computerScore = computerScore + 1;
+    let outcome = (document.querySelector(
+      ".info h1"
+    ).textContent = `Computer wins`);
+    computerScore++;
+    totalScore++;
     return outcome;
   }
 }
-// let selection;
-// function playerInput() {
-//   let input = selection;
-//   return input;
-// }
+function roundCount() {
+  document.querySelector(
+    ".info h3"
+  ).textContent = `This is round ${totalScore}`;
+}
+function addToPlayerScore() {
+  let content = document.createElement("p");
+  content.textContent = `${playerScore}`;
+  playerScoreBoard.appendChild(content);
+}
+function addToComputerScore() {
+  let content = document.createElement("p");
+  content.textContent = `${computerScore}`;
+  computerScoreBoard.appendChild(content);
+}
+function gameOver() {
+  if (totalScore === 5 || playerScore >= 5 || computerScore >= 5) {
+    alert("Game is over");
+    totalScore = 0;
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreBoard.textContent = "";
+    computerScoreBoard.textContent = "";
+  }
+}
+function game() {
+  const computerSelection = computerPlay();
+  console.log(computerSelection);
 
+  if (computerSelection === "Rock") {
+    computerRock.classList.remove("hidden");
+    computerPaper.classList.add("hidden");
+    computerScissor.classList.add("hidden");
+    computerQ.classList.add("hidden");
+  } else if (computerSelection === "Paper") {
+    computerPaper.classList.remove("hidden");
+    computerRock.classList.add("hidden");
+    computerScissor.classList.add("hidden");
+    computerQ.classList.add("hidden");
+  } else if (computerSelection === "Scissor") {
+    computerScissor.classList.remove("hidden");
+    computerRock.classList.add("hidden");
+    computerPaper.classList.add("hidden");
+    computerQ.classList.add("hidden");
+  }
+  playRound(selection, computerSelection);
+  addToPlayerScore();
+  addToComputerScore();
+  roundCount();
+  gameOver();
+}
 selectRock.addEventListener("click", function () {
   selection = "Rock";
-
-  let computerSelection = computerPlay();
-  playRound(selection, computerSelection);
-  console.log(playRound(selection, computerSelection));
-  console.log(playerScore);
-  if (playerScore > computerScore) {
-    console.log("Players wins this round");
-  }
+  game();
 });
 selectPaper.addEventListener("click", function () {
   selection = "Paper";
-
-  let computerSelection = computerPlay();
-  playRound(selection, computerSelection);
+  game();
 });
 selectScissor.addEventListener("click", function () {
   selection = "Scissor";
-
-  let computerSelection = computerPlay();
-  playRound(selection, computerSelection);
+  game();
 });
 
 // function game() {
