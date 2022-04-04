@@ -5,11 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock paper scissor!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
   </head>
   <body>
-    <h1>Rock, paper, scissor!</h1>
-    <button class="btn">Press</button>
+    <div class="container">
+      <div class="left">
+        <div class="player--one">
+          <h1>Player one</h1>
+          <div class="choice">
+            <button><img src="/img/rock.svg" alt="" /></button>
+            <button><img src="/img/paper.svg" alt="" /></button>
+            <button><img src="/img/scissor.svg" alt="" /></button>
+          </div>
+        </div>
+
+        <div class="info">
+          <h1>Rock paper scissor</h1>
+          <h3>Best of 5 rounds</h3>
+        </div>
+      </div>
+      <div class="right">
+        <div class="computer">
+          <h1>Computer</h1>
+          <div class="computer--choice">
+            <h1>?</h1>
+            <img class="rock hidden" src="/img/rock.svg" alt="" />
+            <img class="paper hidden" src="/img/paper.svg" alt="" />
+            <img class="scissor hidden" src="/img/scissor.svg" alt="" />
+          </div>
+        </div>
+        <div class="score">
+          <h1>Score</h1>
+          <div class="scores">
+            <div class="player--score">
+              <h4>Player</h4>
+              <p>1</p>
+              <p>Draw</p>
+            </div>
+            <div class="computer--score">
+              <h4>Computer</h4>
+              <p>1</p>
+              <p>Draw</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
