@@ -108,7 +108,8 @@ body {
 
 .container--main {
   margin-inline: auto;
-  width: min(100% - 1rem);
+
+  width: min(800px, 100%);
   display: grid;
   grid-template-rows: 75vh 25vh;
   position: relative;
@@ -123,12 +124,13 @@ body {
   align-items: center;
 }
 .bottom > h1 {
-  font-size: 11vw;
+  font-size: clamp(2rem, 5vw, 5rem);
   color: var(--backgroundOpacity);
 }
 .bottom > h3 {
-  font-size: 5vw;
-  color: var(--background);
+  font-size: clamp(1rem, 3vw, 3rem);
+
+  color: var(--one);
 }
 .top {
   display: grid;

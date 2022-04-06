@@ -18,7 +18,8 @@ const modal = document.querySelector(".modal");
 const blur = document.querySelector(".blur");
 const exit = document.querySelector(".exit");
 const newRound = document.querySelector(".new--round");
-
+const finalMessage = document.querySelector(".computer h1");
+const roundWinner = document.querySelector(".roundwinner");
 //The computer chooses randomly rock, paper or scissor.
 function computerPlay() {
   const computerChoiceList = ["Rock", "Paper", "Scissor"];
@@ -44,9 +45,7 @@ function playRound(playerSelection, computerSelection) {
 
     return outcome;
   } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
-    let outcome = (document.querySelector(
-      ".roundwinner"
-    ).textContent = `Nice! Rock beats scissors!`);
+    let outcome = (roundWinner.textContent = `Nice! Rock beats scissors!`);
     computerCurrent = 0;
     playerCurrent = 1;
     playerScore++;
@@ -54,9 +53,8 @@ function playRound(playerSelection, computerSelection) {
 
     return outcome;
   } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-    let outcome = (document.querySelector(
-      ".roundwinner"
-    ).textContent = `Well played. Scissors beats paper!`);
+    let outcome =
+      (roundWinner.textContent = `Well played. Scissors beats paper!`);
     computerCurrent = 0;
     playerCurrent = 1;
     playerScore++;
@@ -64,9 +62,7 @@ function playRound(playerSelection, computerSelection) {
 
     return outcome;
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    let outcome = (document.querySelector(
-      ".roundwinner"
-    ).textContent = `Woah, paper beats rock!`);
+    let outcome = (roundWinner.textContent = `Woah, paper beats rock!`);
     computerCurrent = 0;
     playerCurrent = 1;
     playerScore++;
@@ -74,9 +70,8 @@ function playRound(playerSelection, computerSelection) {
 
     return outcome;
   } else {
-    let outcome = (document.querySelector(
-      ".roundwinner"
-    ).textContent = `Computer wins with ${computerSelection} vs ${playerSelection}`);
+    let outcome =
+      (roundWinner.textContent = `Computer wins with ${computerSelection} vs ${playerSelection}`);
     computerCurrent = 1;
     playerCurrent = 0;
     computerScore++;
@@ -196,15 +191,31 @@ function game() {
 //Game ends
 function gameOver() {
   if (totalScore === 5 || playerScore >= 3 || computerScore >= 3) {
+    blur.addEventListener("click", newGame);
+    exit.addEventListener("click", newGame);
+    newRound.addEventListener("click", newGame);
+
+    roundWinner.textContent = "";
+    if (playerScore > computerScore) {
+      finalMessage.textContent = `Nice, you beat the computer!`;
+    } else if (playerScore < computerScore) {
+      finalMessage.textContent = `Computer wins, sad.`;
+    } else {
+      finalMessage.textContent = `A boring draw`;
+    }
+
     computerPaper.classList.add("hidden");
     computerRock.classList.add("hidden");
     computerScissor.classList.add("hidden");
-
-    totalScore = 0;
-    playerScore = 0;
-    computerScore = 0;
-    playerScoreBoard.textContent = "";
-    computerScoreBoard.textContent = "";
-    document.querySelector(".round--number").textContent = `${totalScore + 1}`;
   }
+}
+
+function newGame() {
+  totalScore = 0;
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreBoard.textContent = "";
+  computerScoreBoard.textContent = "";
+  document.querySelector(".round--number").textContent = `${totalScore + 1}`;
+  finalMessage.textContent = "Computer picks?";
 }
