@@ -129,18 +129,19 @@ function scissor() {
   computerScissor.classList.remove("hidden");
 }
 //Player selection
-selectRock.addEventListener("click", function () {
+selectRock.addEventListener("click", () => {
   selection = "Rock";
   game();
 });
-selectPaper.addEventListener("click", function () {
+selectPaper.addEventListener("click", () => {
   selection = "Paper";
   game();
 });
-selectScissor.addEventListener("click", function () {
+selectScissor.addEventListener("click", () => {
   selection = "Scissor";
   game();
 });
+
 //Lets play
 function game() {
   playerCurrent = 0;
