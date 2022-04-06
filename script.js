@@ -1,4 +1,7 @@
 "use strict:";
+// My first attempt at RPS with an UI
+
+//DOM selectors
 const computerQ = document.querySelector(".computer--q");
 const computerRock = document.querySelector(".rock");
 const computerPaper = document.querySelector(".paper");
@@ -6,8 +9,10 @@ const computerScissor = document.querySelector(".scissor");
 const selectRock = document.querySelector(".player--rock");
 const selectPaper = document.querySelector(".player--paper");
 const selectScissor = document.querySelector(".player--scissor");
-const playerScoreBoard = document.querySelector(".player--score");
-const computerScoreBoard = document.querySelector(".computer--score");
+const playerScoreBoard = document.querySelector(".player--scores");
+const computerScoreBoard = document.querySelector(".computer--scores");
+const computerTotal = document.querySelector(".computer--total");
+const playerTotal = document.querySelector(".player--total");
 const newP = document.createElement("p");
 //The computer chooses randomly rock, paper or scissor.
 function computerPlay() {
@@ -18,6 +23,10 @@ function computerPlay() {
 let computerScore = 0;
 let playerScore = 0;
 let totalScore = 0;
+let playerCurrent = 0;
+let computerCurrent = 0;
+
+//Play 1 round of RPS
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
@@ -25,34 +34,49 @@ function playRound(playerSelection, computerSelection) {
       ".info h1"
     ).textContent = `Both picked ${playerSelection}`);
     totalScore++;
+    computerCurrent = 0;
+    playerCurrent = 0;
+
     return outcome;
   } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
     let outcome = (document.querySelector(
       ".info h1"
     ).textContent = `Rock beats scissor`);
+    computerCurrent = 0;
+    playerCurrent = 1;
     playerScore++;
     totalScore++;
+
     return outcome;
   } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
     let outcome = (document.querySelector(
       ".info h1"
     ).textContent = `Scissor beats paper`);
+    computerCurrent = 0;
+    playerCurrent = 1;
     playerScore++;
     totalScore++;
+
     return outcome;
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
     let outcome = (document.querySelector(
       ".info h1"
     ).textContent = `Paper beats rock`);
+    computerCurrent = 0;
+    playerCurrent = 1;
     playerScore++;
     totalScore++;
+
     return outcome;
   } else {
     let outcome = (document.querySelector(
       ".info h1"
     ).textContent = `Computer wins`);
+    computerCurrent = 1;
+    playerCurrent = 0;
     computerScore++;
     totalScore++;
+
     return outcome;
   }
 }
@@ -61,52 +85,50 @@ function roundCount() {
     ".info h3"
   ).textContent = `This is round ${totalScore}`;
 }
+
 function addToPlayerScore() {
   let content = document.createElement("p");
-  content.textContent = `${playerScore}`;
-  playerScoreBoard.appendChild(content);
+  if (playerCurrent > computerCurrent) {
+    content.textContent = `✓`;
+    playerScoreBoard.appendChild(content);
+  } else if (playerCurrent < computerCurrent) {
+    content.textContent = `x`;
+    playerScoreBoard.appendChild(content);
+  } else {
+    content.textContent = `-`;
+    playerScoreBoard.appendChild(content);
+  }
 }
 function addToComputerScore() {
   let content = document.createElement("p");
-  content.textContent = `${computerScore}`;
-  computerScoreBoard.appendChild(content);
-}
-function gameOver() {
-  if (totalScore === 5 || playerScore >= 5 || computerScore >= 5) {
-    alert("Game is over");
-    totalScore = 0;
-    playerScore = 0;
-    computerScore = 0;
-    playerScoreBoard.textContent = "";
-    computerScoreBoard.textContent = "";
+  if (playerCurrent < computerCurrent) {
+    content.textContent = `✓`;
+    computerScoreBoard.appendChild(content);
+  } else if (playerCurrent > computerCurrent) {
+    content.textContent = `x`;
+    computerScoreBoard.appendChild(content);
+  } else if (playerCurrent === computerCurrent) {
+    content.textContent = `-`;
+    computerScoreBoard.appendChild(content);
   }
 }
-function game() {
-  const computerSelection = computerPlay();
-  console.log(computerSelection);
 
-  if (computerSelection === "Rock") {
-    computerRock.classList.remove("hidden");
-    computerPaper.classList.add("hidden");
-    computerScissor.classList.add("hidden");
-    computerQ.classList.add("hidden");
-  } else if (computerSelection === "Paper") {
-    computerPaper.classList.remove("hidden");
-    computerRock.classList.add("hidden");
-    computerScissor.classList.add("hidden");
-    computerQ.classList.add("hidden");
-  } else if (computerSelection === "Scissor") {
-    computerScissor.classList.remove("hidden");
-    computerRock.classList.add("hidden");
-    computerPaper.classList.add("hidden");
-    computerQ.classList.add("hidden");
-  }
-  playRound(selection, computerSelection);
-  addToPlayerScore();
-  addToComputerScore();
-  roundCount();
-  gameOver();
+function paper() {
+  computerRock.classList.add("hidden");
+  computerScissor.classList.add("hidden");
+  computerPaper.classList.remove("hidden");
 }
+function rock() {
+  computerPaper.classList.add("hidden");
+  computerScissor.classList.add("hidden");
+  computerRock.classList.remove("hidden");
+}
+function scissor() {
+  computerPaper.classList.add("hidden");
+  computerRock.classList.add("hidden");
+  computerScissor.classList.remove("hidden");
+}
+//Player selection
 selectRock.addEventListener("click", function () {
   selection = "Rock";
   game();
@@ -119,38 +141,46 @@ selectScissor.addEventListener("click", function () {
   selection = "Scissor";
   game();
 });
+//Lets play
+function game() {
+  playerCurrent = 0;
+  computerCurrent = 0;
+  let computerSelection = computerPlay();
+  computerQ.classList.add("hidden");
+  //See what the computer chose
+  switch (computerSelection) {
+    case "Rock":
+      rock();
+      break;
+    case "Paper":
+      paper();
+      break;
+    case "Scissor":
+      scissor();
+      break;
+    default:
+      computerQ.classList.remove("hidden");
+  }
 
-// function game() {
-//   let total = 0;
-
-//   if (total < 5) {
-//     // for (let i = 0; i < 1; i++) {
-//     total++;
-//     let playerSelection = selection;
-//     let computerSelection = computerPlay();
-//     playerScoreBoard.appendChild(newP);
-//     computerScoreBoard.appendChild(newP);
-
-//     // document.querySelector(".player--score p").textContent = `${playerScore}`;
-//     console.log(computerScoreBoard);
-//     console.log(playerScoreBoard);
-//     playRound(playerSelection, computerSelection);
-
-//     console.log(
-//       `Player picks: ${playerSelection} and has ${playerScore} points`
-//     );
-//     console.log(
-//       `Computer picks: ${computerSelection} and has ${computerScore} points`
-//     );
-//     console.log(total);
-//     // }
-//   }
-
-//   if (playerScore > computerScore) {
-//     console.log(`Player wins with ${playerScore} to ${computerScore}`);
-//   } else if (playerScore === computerScore) {
-//     console.log(`The game was a draw`);
-//   } else {
-//     console.log(`Computer wins with ${computerScore} to ${playerScore}`);
-//   }
-// }
+  playRound(selection, computerSelection);
+  addToComputerScore();
+  addToPlayerScore();
+  playerTotal.textContent = `${playerScore}`;
+  computerTotal.textContent = `${computerScore}`;
+  roundCount();
+  gameOver();
+}
+//Game ends
+function gameOver() {
+  if (totalScore === 5 || playerScore >= 5 || computerScore >= 5) {
+    alert("Game is over");
+    playerTotal.textContent = ``;
+    computerTotal.textContent = ``;
+    totalScore = 0;
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreBoard.textContent = "";
+    computerScoreBoard.textContent = "";
+    computerQ.classList.add("hidden");
+  }
+}

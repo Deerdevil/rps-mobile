@@ -85,6 +85,7 @@ button {
 
 /* Layout */
 body {
+  color: var(--background);
   display: grid;
   place-items: center;
   background: #298f6c;
@@ -180,8 +181,17 @@ p {
   flex-direction: column;
   align-items: center;
 }
-h4 {
-  margin-bottom: 1em;
+.total {
+  width: 100%;
+  height: 100%;
+  /* display: flex;
+  justify-content: space-around; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: top;
+  margin-left: 6.2em;
+  place-content: top;
+  /* border-top: 1px solid var(--background); */
 }
 
 /* Typo */
@@ -195,6 +205,9 @@ h1 {
 h3 {
   color: var(--background);
 }
+h4 {
+  margin-bottom: 1em;
+}
 .player--one > h1 {
   color: var(--three);
 }
@@ -205,7 +218,10 @@ h3 {
   font-size: 8em;
 }
 .score > h1 {
-  font-size: 3em;
+  font-size: 2.2em;
+}
+.info > h1 {
+  font-size: 2.2em;
 }
 /* SVGs */
 img {
@@ -218,9 +234,9 @@ button:hover {
   scale: 120%;
 }
 .paper {
-  width: 15%;
-  height: 25%;
-  margin-top: 5em;
+  width: 20%;
+  height: 30%;
+  margin-top: 7em;
 }
 .hidden {
   display: none;
