@@ -15,8 +15,24 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <!-- Modal when computer picks -->
+    <div class="blur hidden"></div>
     <div class="container--main">
-      <!-- <h1>Player one</h1> -->
+      <div class="modal hidden">
+        <div class="computer">
+          <h1>Computer picks?</h1>
+          <div class="computer--choice">
+            <h1 class="computer--q ">?</h1>
+            <img class="rock hidden" src="img/rock.svg" alt="" />
+            <img class="paper hidden " src="img/paper.svg" alt="" />
+            <img class="scissor hidden" src="img/scissor.svg" alt="" />
+            <img class="exit "src="img/x.svg" alt="">
+          </div> 
+          <p class="roundwinner">Well played, paper beats rock!</p>
+          <button class="new--round">New round</button>
+        </div>
+      </div>
+   <!-- End of modal -->
 
       <div class="top">
         <div class="container--player">
@@ -31,11 +47,9 @@
           </div>
         </div>
         <div class="info--left">
-          <h1>Round <span class="round--number">2</span></h1>
+          <h1>Round <span class="round--number">1</span></h1>
         </div>
-        <!-- <div class="info--right">
-          <h1></h1> -->
-        <!-- </div> -->
+     
       </div> 
       <div class="bottom hidden">
         <h1>Rochambeau</h1>
@@ -44,11 +58,11 @@
       <div class="score">      
         <div class="scores">
           <div class="player--score">
-            <h4>Player</h4>
+            <h4>Playerscore</h4>
             <div class="player--scores"></div>
           </div>
           <div class="computer--score">
-            <h4>Computer</h4>
+            <h4>Computerscore</h4>
             <div class="computer--scores"></div>
           </div>
         </div>
@@ -58,18 +72,6 @@
     </div>
 
        
-      <!-- 
-      <div class="right">
-        <div class="computer">
-          <h1>Computer</h1>
-          <div class="computer--choice">
-            <h1 class="computer--q">?</h1>
-            <img class="rock hidden" src="img/rock.svg" alt="" />
-            <img class="paper hidden" src="img/paper.svg" alt="" />
-            <img class="scissor hidden" src="img/scissor.svg" alt="" />
-          </div>
-        </div>
-         -->
-    </div>
+   
   </body>
 </html>
