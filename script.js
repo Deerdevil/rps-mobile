@@ -159,7 +159,7 @@ function game() {
       scissor();
       break;
     default:
-      computerQ.classList.remove("hidden");
+      computerQ.classList.add("hidden");
   }
 
   playRound(selection, computerSelection);
@@ -173,6 +173,10 @@ function game() {
 //Game ends
 function gameOver() {
   if (totalScore === 5 || playerScore >= 5 || computerScore >= 5) {
+    computerPaper.classList.add("hidden");
+    computerRock.classList.add("hidden");
+    computerScissor.classList.add("hidden");
+    computerQ.classList.remove("hidden");
     alert("Game is over");
     playerTotal.textContent = ``;
     computerTotal.textContent = ``;
@@ -181,6 +185,5 @@ function gameOver() {
     computerScore = 0;
     playerScoreBoard.textContent = "";
     computerScoreBoard.textContent = "";
-    computerQ.classList.add("hidden");
   }
 }
