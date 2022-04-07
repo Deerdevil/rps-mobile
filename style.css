@@ -106,7 +106,9 @@ body {
   );
   background: linear-gradient(135deg, #298f6c 0%, #3a9a7e 35%, #61d197 100%);
 }
-
+a {
+  color: var(--background);
+}
 .container--main {
   margin-inline: auto;
 
