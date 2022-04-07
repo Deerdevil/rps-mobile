@@ -142,7 +142,7 @@ a {
   grid-template-rows: 50px, 1fr;
   gap: 1em;
 }
-@media screen and (max-height: 575px) {
+@media screen and (max-height: 676px) {
   .choice--bg {
     height: 5rem;
     width: 5rem;
@@ -206,7 +206,7 @@ a {
   margin-bottom: 0.5em;
   padding: 0.5em;
 }
-@media screen and (max-height: 658px) {
+@media screen and (max-height: 670px) {
   .choice--bg {
     margin: 0;
     width: 6rem;
@@ -277,7 +277,23 @@ a {
   display: flex;
   gap: 1em;
 }
-
+.player--scores > p {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+.computer--scores > p {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin-bottom: 1em;
+}
+.player--score > h4 {
+  margin-top: 0;
+  font-size: clamp(1rem, 5vw, 3rem);
+}
+.computer--score > h4 {
+  margin-top: 0;
+  font-size: clamp(1rem, 5vw, 3rem);
+}
 /* Typo */
 html {
   font-family: "Montserrat", sans-serif;
@@ -289,15 +305,8 @@ h3 {
   color: var(--background);
 }
 h4 {
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
   color: var(--backgroundOpacity);
-}
-.player--one > h1 {
-  color: var(--three);
-}
-
-.computer--choice > h1 {
-  font-size: 8em;
 }
 
 /* SVGs */
