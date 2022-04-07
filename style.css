@@ -294,6 +294,10 @@ a {
   margin-top: 0;
   font-size: clamp(1rem, 5vw, 3rem);
 }
+.roundwinner {
+  font-size: clamp(0.5rem, 1rem, 2.5rem);
+  padding: 0.5em;
+}
 /* Typo */
 html {
   font-family: "Montserrat", sans-serif;
@@ -325,6 +329,11 @@ button:hover {
 @media screen and (min-height: 800px) {
   .paper {
     height: clamp(5rem, 7rem, 7rem);
+  }
+}
+@media screen and (max-height: 550px) {
+  .paper {
+    height: clamp(2rem, 3rem, 3rem);
   }
 }
 .exit {
@@ -362,10 +371,28 @@ button {
   padding: 0.5em 1em 0.5em 1em;
   cursor: pointer;
   margin-bottom: 0.5em;
+  margin-top: 0.2em;
+  color: var(--background);
 }
 @media screen and (max-height: 600px) {
   button {
+    padding: 0;
+    width: 150px;
+    height: 25px;
+    margin-top: 0;
+  }
+  .roundwinner {
+    font-size: clamp(0.2rem, 1rem, 2.5rem);
+    padding: 0.2em;
+    margin: 0;
+  }
+  .computer--choice {
     margin-top: 0.5em;
+
+    justify-content: center;
+  }
+  .computer--choice > img {
+    scale: 150%;
   }
 }
 button:hover {

@@ -261,13 +261,16 @@ function gameOver() {
     bottom.classList.remove("hidden");
     playerScoreBoard.textContent = "";
     computerScoreBoard.textContent = "";
-    roundWinner.textContent = "";
+
     if (playerScore > computerScore) {
-      finalMessage.textContent = `Nice, you beat the computer!`;
+      finalMessage.textContent = `Congrats!`;
+      roundWinner.textContent = `You beat the computer with ${playerScore} to ${computerScore}`;
     } else if (playerScore < computerScore) {
-      finalMessage.textContent = `Computer wins, sad.`;
+      finalMessage.textContent = `You lost`;
+      roundWinner.textContent = `Computer beat you with ${computerScore} to ${playerScore}  `;
     } else {
       finalMessage.textContent = `A boring draw`;
+      roundWinner.textContent = `The score was ${playerScore} to ${computerScore}`;
     }
 
     computerPaper.classList.add("hidden");
