@@ -22,6 +22,7 @@ const finalMessage = document.querySelector(".computer h1");
 const roundWinner = document.querySelector(".roundwinner");
 const scoreBoard = document.querySelector(".score");
 const bottom = document.querySelector(".bottom");
+
 //The computer chooses randomly rock, paper or scissor.
 function computerPlay() {
   const computerChoiceList = ["Rock", "Paper", "Scissor"];
@@ -149,28 +150,32 @@ function modalRemove() {
 }
 function computerIsPicking() {
   question();
+  swapImg();
+  newRound.classList.add("hidden");
   finalMessage.textContent = "Computer thinking!";
   roundWinner.textContent = "";
 }
 //Clickables
 selectRock.addEventListener("click", () => {
   selection = "Rock";
+
   modalRemove();
   computerIsPicking();
 
-  setTimeout("game()", 3000);
+  setTimeout("game()", 4000);
 });
 selectPaper.addEventListener("click", () => {
   selection = "Paper";
   modalRemove();
   computerIsPicking();
-  setTimeout("game()", 2000);
+  setTimeout("game()", 4000);
 });
 selectScissor.addEventListener("click", () => {
   selection = "Scissor";
   modalRemove();
   computerIsPicking();
-  setTimeout("game()", 2000);
+
+  setTimeout("game()", 4000);
 });
 function closeModal() {
   modal.classList.add("hidden");
@@ -180,8 +185,35 @@ blur.addEventListener("click", closeModal);
 exit.addEventListener("click", closeModal);
 newRound.addEventListener("click", closeModal);
 
+//Functions to loop thru computer thinking
+
+function swapImg() {
+  setTimeout("swapRock()", 500);
+  setTimeout("swapScissor()", 1000);
+  setTimeout("swapPaper()", 1500);
+  setTimeout("swapQ()", 2000);
+}
+function swapRock() {
+  computerQ.classList.add("hidden");
+  computerRock.classList.remove("hidden");
+}
+function swapScissor() {
+  computerRock.classList.add("hidden");
+  computerScissor.classList.remove("hidden");
+}
+function swapPaper() {
+  computerPaper.classList.remove("hidden");
+  computerScissor.classList.add("hidden");
+}
+
+function swapQ() {
+  computerQ.classList.remove("hidden");
+  computerPaper.classList.add("hidden");
+}
+
 //Lets play
 function game() {
+  newRound.classList.remove("hidden");
   finalMessage.textContent = "Computer picks!";
   playerCurrent = 0;
   computerCurrent = 0;
@@ -241,20 +273,3 @@ function newGame() {
   document.querySelector(".round--number").textContent = `${totalScore + 1}`;
   finalMessage.textContent = "Computer picks!";
 }
-
-let index = 0;
-const imageArr = ["img/rock.svg", "img/scissor.svg", "img/paper.svg"];
-
-function changeImg() {
-  index = index + 1;
-  if (index === imageArr.length) index = 0;
-  let image = document.querySelector(".computer--q");
-  image.src = imageArr[index];
-}
-
-let loop = setInterval(function () {
-  changeImg();
-  if (index === imageArr.length) {
-    clearInterval(loop);
-  }
-}, 500);
