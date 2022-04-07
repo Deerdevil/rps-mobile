@@ -252,16 +252,12 @@ function gameOver() {
     exit.addEventListener("click", newGame);
     newRound.addEventListener("click", newGame);
     newRound.textContent = "New game";
-    totalScore = 0;
-    playerScore = 0;
-    computerScore = 0;
-    playerCurrent = 0;
-    computerCurrent = 0;
+
     scoreBoard.classList.add("hidden");
     bottom.classList.remove("hidden");
     playerScoreBoard.textContent = "";
     computerScoreBoard.textContent = "";
-
+    roundWinner.textContent = "";
     if (playerScore > computerScore) {
       finalMessage.textContent = `Congrats!`;
       roundWinner.textContent = `You beat the computer with ${playerScore} to ${computerScore}`;
@@ -276,6 +272,11 @@ function gameOver() {
     computerPaper.classList.add("hidden");
     computerRock.classList.add("hidden");
     computerScissor.classList.add("hidden");
+    totalScore = 0;
+    playerScore = 0;
+    computerScore = 0;
+    playerCurrent = 0;
+    computerCurrent = 0;
   }
 }
 
