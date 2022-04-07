@@ -247,7 +247,7 @@ function game() {
 }
 //Game ends
 function gameOver() {
-  if (totalScore === 2 || playerScore >= 3 || computerScore >= 3) {
+  if (totalScore === 5 || playerScore >= 3 || computerScore >= 3) {
     blur.addEventListener("click", newGame);
     exit.addEventListener("click", newGame);
     newRound.addEventListener("click", newGame);
