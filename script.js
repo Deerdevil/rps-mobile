@@ -20,6 +20,8 @@ const exit = document.querySelector(".exit");
 const newRound = document.querySelector(".new--round");
 const finalMessage = document.querySelector(".computer h1");
 const roundWinner = document.querySelector(".roundwinner");
+const scoreBoard = document.querySelector(".score");
+const bottom = document.querySelector(".bottom");
 //The computer chooses randomly rock, paper or scissor.
 function computerPlay() {
   const computerChoiceList = ["Rock", "Paper", "Scissor"];
@@ -132,27 +134,42 @@ function scissor() {
   computerRock.classList.add("hidden");
   computerScissor.classList.remove("hidden");
 }
+function question() {
+  computerPaper.classList.add("hidden");
+  computerRock.classList.add("hidden");
+  computerScissor.classList.add("hidden");
+  computerQ.classList.remove("hidden");
+}
 
 function modalRemove() {
   modal.classList.remove("hidden");
   blur.classList.remove("hidden");
+  scoreBoard.classList.remove("hidden");
+  bottom.classList.add("hidden");
 }
-
+function computerIsPicking() {
+  question();
+  finalMessage.textContent = "Computer thinking!";
+  roundWinner.textContent = "What will it be?";
+}
 //Clickables
 selectRock.addEventListener("click", () => {
   selection = "Rock";
   modalRemove();
-  game();
+  computerIsPicking();
+  setTimeout("game()", 2000);
 });
 selectPaper.addEventListener("click", () => {
   selection = "Paper";
   modalRemove();
-  game();
+  computerIsPicking();
+  setTimeout("game()", 2000);
 });
 selectScissor.addEventListener("click", () => {
   selection = "Scissor";
   modalRemove();
-  game();
+  computerIsPicking();
+  setTimeout("game()", 2000);
 });
 function closeModal() {
   modal.classList.add("hidden");
@@ -164,6 +181,7 @@ newRound.addEventListener("click", closeModal);
 
 //Lets play
 function game() {
+  finalMessage.textContent = "Computer picks!";
   playerCurrent = 0;
   computerCurrent = 0;
   let computerSelection = computerPlay();
@@ -182,6 +200,7 @@ function game() {
     default:
       computerQ.classList.add("hidden");
   }
+
   playRound(selection, computerSelection);
   addToComputerScore();
   addToPlayerScore();
@@ -217,5 +236,5 @@ function newGame() {
   playerScoreBoard.textContent = "";
   computerScoreBoard.textContent = "";
   document.querySelector(".round--number").textContent = `${totalScore + 1}`;
-  finalMessage.textContent = "Computer picks?";
+  finalMessage.textContent = "Computer picks!";
 }

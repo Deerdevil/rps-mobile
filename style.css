@@ -191,12 +191,19 @@ body {
   background-color: var(--three);
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2em;
+  margin-top: 1vw;
+  align-items: center;
+}
+@media screen and (max-height: 742px) {
+  .computer {
+    gap: 0;
+  }
 }
 .computer > h1 {
   color: var(--background);
-  margin-top: 1em;
+
+  font-size: clamp(1.5rem, 4vw, 5rem);
 }
 .computer > p {
   margin-top: 3em;
@@ -297,10 +304,16 @@ button:hover {
 }
 
 button {
+  margin-top: max(1em, 3em);
   background: linear-gradient(135deg, #298f6c 0%, #3a9a7e 35%, #61d197 100%);
   border: 1px solid var(--background);
   padding: 0.5em 1em 0.5em 1em;
   cursor: pointer;
+}
+@media screen and (max-height: 600px) {
+  button {
+    margin-top: 0.5em;
+  }
 }
 button:hover {
   background: var(--three);
