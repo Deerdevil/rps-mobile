@@ -152,7 +152,12 @@ function computerIsPicking() {
   question();
   swapImg();
   newRound.classList.add("hidden");
-  finalMessage.textContent = "Computer thinking!";
+  if (totalScore >= 4) {
+    finalMessage.textContent = "Last round!";
+  } else {
+    finalMessage.textContent = "Computer thinking!";
+  }
+
   roundWinner.textContent = "";
 }
 //Clickables
@@ -242,11 +247,20 @@ function game() {
 }
 //Game ends
 function gameOver() {
-  if (totalScore === 5 || playerScore >= 3 || computerScore >= 3) {
+  if (totalScore === 2 || playerScore >= 3 || computerScore >= 3) {
     blur.addEventListener("click", newGame);
     exit.addEventListener("click", newGame);
     newRound.addEventListener("click", newGame);
-
+    newRound.textContent = "New game";
+    totalScore = 0;
+    playerScore = 0;
+    computerScore = 0;
+    playerCurrent = 0;
+    computerCurrent = 0;
+    scoreBoard.classList.add("hidden");
+    bottom.classList.remove("hidden");
+    playerScoreBoard.textContent = "";
+    computerScoreBoard.textContent = "";
     roundWinner.textContent = "";
     if (playerScore > computerScore) {
       finalMessage.textContent = `Nice, you beat the computer!`;
@@ -263,13 +277,8 @@ function gameOver() {
 }
 
 function newGame() {
-  scoreBoard.classList.add("hidden");
-  bottom.classList.remove("hidden");
-  totalScore = 0;
-  playerScore = 0;
-  computerScore = 0;
-  playerScoreBoard.textContent = "";
-  computerScoreBoard.textContent = "";
+  newRound.textContent = "New round";
+
   document.querySelector(".round--number").textContent = `${totalScore + 1}`;
   finalMessage.textContent = "Computer picks!";
 }
