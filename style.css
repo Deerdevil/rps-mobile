@@ -270,6 +270,10 @@ button {
 button:hover {
   scale: 120%;
 }
+.computer--q {
+  position: absolute;
+  max-height: 100px;
+}
 .paper {
   width: 20%;
   height: 30%;

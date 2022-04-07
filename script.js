@@ -40,7 +40,7 @@ function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     let outcome = (document.querySelector(
       ".roundwinner"
-    ).textContent = `Both picked ${playerSelection}`);
+    ).textContent = `Draw! Both picked ${playerSelection}!`);
     totalScore++;
     computerCurrent = 0;
     playerCurrent = 0;
@@ -150,14 +150,15 @@ function modalRemove() {
 function computerIsPicking() {
   question();
   finalMessage.textContent = "Computer thinking!";
-  roundWinner.textContent = "What will it be?";
+  roundWinner.textContent = "";
 }
 //Clickables
 selectRock.addEventListener("click", () => {
   selection = "Rock";
   modalRemove();
   computerIsPicking();
-  setTimeout("game()", 2000);
+
+  setTimeout("game()", 3000);
 });
 selectPaper.addEventListener("click", () => {
   selection = "Paper";
@@ -230,6 +231,8 @@ function gameOver() {
 }
 
 function newGame() {
+  scoreBoard.classList.add("hidden");
+  bottom.classList.remove("hidden");
   totalScore = 0;
   playerScore = 0;
   computerScore = 0;
@@ -238,3 +241,20 @@ function newGame() {
   document.querySelector(".round--number").textContent = `${totalScore + 1}`;
   finalMessage.textContent = "Computer picks!";
 }
+
+let index = 0;
+const imageArr = ["img/rock.svg", "img/scissor.svg", "img/paper.svg"];
+
+function changeImg() {
+  index = index + 1;
+  if (index === imageArr.length) index = 0;
+  let image = document.querySelector(".computer--q");
+  image.src = imageArr[index];
+}
+
+let loop = setInterval(function () {
+  changeImg();
+  if (index === imageArr.length) {
+    clearInterval(loop);
+  }
+}, 500);
